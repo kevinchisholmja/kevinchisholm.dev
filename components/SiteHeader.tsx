@@ -15,10 +15,12 @@ const nav = [
 
 export default function SiteHeader() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
 
-  // Close menu on route change
-  useEffect(() => setOpen(false), [pathname]);
+  return <SiteHeaderContent key={pathname} pathname={pathname} />;
+}
+
+function SiteHeaderContent({ pathname }: { pathname: string }) {
+  const [open, setOpen] = useState(false);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
