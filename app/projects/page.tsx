@@ -25,8 +25,8 @@ export default function ProjectsPage() {
           className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 fade-up"
           style={{ animationDelay: "0.08s" }}
         >
-          {projects.map((project) => (
-            <BrowserWindow key={project.slug} project={project} />
+          {projects.map((project, i) => (
+            <BrowserWindow key={project.slug} project={project} priority={i === 0} />
           ))}
         </div>
       ) : (

@@ -10,9 +10,10 @@ const statusStyles: Record<Project["status"], string> = {
 
 type Props = {
   project: Project;
+  priority?: boolean;
 };
 
-export default function BrowserWindow({ project }: Props) {
+export default function BrowserWindow({ project, priority = false }: Props) {
   const href = project.url ?? project.repo ?? "#";
   const domain = project.url
     ? project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")
@@ -45,6 +46,7 @@ export default function BrowserWindow({ project }: Props) {
             alt={project.title}
             fill
             sizes="(max-width: 640px) 100vw, 50vw"
+            priority={priority}
             className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
           />
         ) : (

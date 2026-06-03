@@ -15,9 +15,34 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const baseUrl = "https://kevinchisholm.dev";
+
 export const metadata: Metadata = {
-  title: "Kevin Chisholm",
-  description: "I build AI-powered tools that solve real problems.",
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: "Kevin Chisholm",
+    template: "%s — Kevin Chisholm",
+  },
+  description:
+    "I build AI-powered tools that solve real problems. Consulting for technical projects.",
+  openGraph: {
+    type: "website",
+    url: baseUrl,
+    siteName: "Kevin Chisholm",
+    title: "Kevin Chisholm",
+    description:
+      "I build AI-powered tools that solve real problems. Consulting for technical projects.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kevin Chisholm",
+    description:
+      "I build AI-powered tools that solve real problems. Consulting for technical projects.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +57,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="bg-canvas text-ink antialiased min-h-screen flex flex-col">
+        {/* Background blobs — fixed, pure CSS, GPU-only */}
+        <div className="bg-blob bg-blob-1" aria-hidden="true" />
+        <div className="bg-blob bg-blob-2" aria-hidden="true" />
+
         <ThemeProvider>
           <SiteHeader />
           <main className="flex-1">{children}</main>
