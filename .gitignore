@@ -141,3 +141,13 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# misc
+.DS_Store
+*.pem
+
+# personal / local-only
+activity/
+notes/
+playbook/
+

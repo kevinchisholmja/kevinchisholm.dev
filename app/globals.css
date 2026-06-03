@@ -1,0 +1,185 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Class-based dark mode — controlled by next-themes */
+@variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ *
+ * Semantic colour tokens — light and dark are designed as one system.
+ * Components use bg-canvas / bg-surface / text-ink / text-muted /
+ * border-line / text-accent, etc. No scattered dark: variants needed.
+ * ------------------------------------------------------------------ */
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+}
+
+:root {
+  /* Light — warm paper, not cold zinc */
+  --canvas: #fcfcfb;
+  --surface: #ffffff;
+  --elevated: #f6f5f2;
+  --line: #e9e7e2;
+  --line-strong: #d9d6cf;
+  --ink: #1a1a17;
+  --muted: #56544d;
+  --faint: #8b897f;
+  --accent: #ea580c;
+  --accent-soft: rgba(234, 88, 12, 0.1);
+  --dot: rgba(0, 0, 0, 0.045);
+}
+
+.dark {
+  /* Dark — deep, slightly warm near-black */
+  --canvas: #0a0a0a;
+  --surface: #141413;
+  --elevated: #1c1b1a;
+  --line: #262625;
+  --line-strong: #383735;
+  --ink: #ecebe7;
+  --muted: #a2a09a;
+  --faint: #6c6a64;
+  --accent: #fb923c;
+  --accent-soft: rgba(251, 146, 60, 0.13);
+  --dot: rgba(255, 255, 255, 0.035);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--ink);
+  /* Fine dot grid grounds both light and dark */
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 22px 22px;
+  text-rendering: optimizeLegibility;
+}
+
+/* Branded text selection */
+::selection {
+  background: var(--accent-soft);
+}
+
+/* Crafted focus ring */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 5px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Animated underline link — grows from left on hover, retracts right.
+ * ------------------------------------------------------------------ */
+.link {
+  position: relative;
+  text-decoration: none;
+}
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.6, 0, 0.2, 1);
+}
+.link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ------------------------------------------------------------------ *
+ * Entrance — subtle, fast fade-up. Stagger via inline animation-delay.
+ * ------------------------------------------------------------------ */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.55s cubic-bezier(0.21, 0.5, 0.3, 1) both;
+}
+
+/* Availability pulse */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Theme-toggle icon spring entrance */
+@keyframes icon-spring-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-25deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotate(4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+.icon-enter {
+  display: block;
+  animation: icon-spring-in 200ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fade-up,
+  .pulse-dot,
+  .icon-enter {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Theme switch — circle reveal via View Transitions API.
+ * The NEW theme always clips in over the old one, so the reveal
+ * expands from the toggle in BOTH directions (never reverses).
+ * ------------------------------------------------------------------ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
