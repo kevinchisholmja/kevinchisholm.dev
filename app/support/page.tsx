@@ -12,7 +12,7 @@ const links = [
   {
     label: "Patreon",
     description: "Support with a monthly membership",
-    href: "https://patreon.com/kevinchisholm",
+    href: "https://patreon.com/kevinchisholmja",
   },
 ];
 
