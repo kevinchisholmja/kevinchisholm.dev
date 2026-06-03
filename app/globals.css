@@ -166,15 +166,15 @@ body {
   border-radius: 50%;
   pointer-events: none;
   will-change: transform;
-  filter: blur(70px);
+  filter: blur(80px);
   z-index: 0;
 }
 
 .bg-blob-1 {
-  width: 45vw;
-  height: 45vw;
-  max-width: 480px;
-  max-height: 480px;
+  width: 50vw;
+  height: 50vw;
+  max-width: 520px;
+  max-height: 520px;
   top: -15%;
   right: -10%;
   background: var(--blob-1);
@@ -182,10 +182,10 @@ body {
 }
 
 .bg-blob-2 {
-  width: 30vw;
-  height: 30vw;
-  max-width: 360px;
-  max-height: 360px;
+  width: 40vw;
+  height: 40vw;
+  max-width: 480px;
+  max-height: 480px;
   bottom: -12%;
   left: -10%;
   background: var(--blob-2);
