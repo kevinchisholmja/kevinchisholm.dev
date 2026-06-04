@@ -56,6 +56,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -167,7 +168,11 @@ body {
   pointer-events: none;
   will-change: transform;
   filter: blur(80px);
-  z-index: 0;
+  /* Sit behind all normal-flow content. Negative z-index keeps the blobs
+   * above the body background but below page content, so structural elements
+   * no longer need to be force-elevated (which previously broke fixed
+   * overlays like the mobile menu — see note below). */
+  z-index: -1;
 }
 
 .bg-blob-1 {
@@ -202,11 +207,10 @@ body {
   --blob-2: rgba(129, 140, 248, 0.18);
 }
 
-/* Ensure content renders above the blobs */
-body > :not(.bg-blob) {
-  position: relative;
-  z-index: 1;
-}
+/* Blobs use a negative z-index (above), so content renders above them
+ * naturally — no per-child elevation needed. Do NOT reintroduce a
+ * `body > :not(.bg-blob)` rule: it forces position:relative on every body
+ * child and silently overrides the mobile menu / backdrop `fixed` overlays. */
 
 @keyframes blob-drift-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }

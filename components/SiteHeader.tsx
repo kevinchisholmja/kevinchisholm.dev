@@ -22,10 +22,22 @@ export default function SiteHeader() {
 function SiteHeaderContent({ pathname }: { pathname: string }) {
   const [open, setOpen] = useState(false);
 
-  // Prevent body scroll when menu is open
+  // Prevent body scroll when menu is open without layout shift
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (open) {
+      const scrollbar = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      if (scrollbar > 0) {
+        document.body.style.paddingRight = `${scrollbar}px`;
+      }
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }
+    return () => { 
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    };
   }, [open]);
 
   return (

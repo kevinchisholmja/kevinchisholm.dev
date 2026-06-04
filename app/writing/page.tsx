@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getAllPosts } from "@/lib/content";
 
 export const metadata = {
-  title: "Writing — Kevin Chisholm",
+  title: "Writing",
   description: "Thoughts on building software, AI, and shipping products.",
 };
 
@@ -46,7 +46,7 @@ export default function WritingPage() {
                   </div>
                 )}
               </div>
-              <time className="text-xs text-faint tabular-nums shrink-0">
+              <time dateTime={post.date} className="text-xs text-faint tabular-nums shrink-0">
                 {post.date}
               </time>
             </Link>

@@ -102,7 +102,7 @@ export default function Home() {
                     {post.description}
                   </p>
                 </div>
-                <time className="text-xs text-faint tabular-nums shrink-0">
+                <time dateTime={post.date} className="text-xs text-faint tabular-nums shrink-0">
                   {post.date}
                 </time>
               </Link>

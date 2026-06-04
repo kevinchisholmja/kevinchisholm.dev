@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) return {};
   return {
-    title: `${post.title} — Kevin Chisholm`,
+    title: post.title,
     description: post.description,
   };
 }
@@ -31,7 +31,7 @@ export default async function PostPage({ params }: Props) {
         <h1 className="text-3xl sm:text-4xl font-semibold text-ink leading-tight tracking-tight">
           {post.title}
         </h1>
-        <time className="block text-sm text-faint mt-3 tabular-nums">
+        <time dateTime={post.date} className="block text-sm text-faint mt-3 tabular-nums">
           {post.date}
         </time>
       </header>

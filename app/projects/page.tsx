@@ -2,7 +2,7 @@ import BrowserWindow from "@/components/BrowserWindow";
 import { getAllProjects } from "@/lib/content";
 
 export const metadata = {
-  title: "Projects — Kevin Chisholm",
+  title: "Projects",
   description: "AI-powered tools and applications I have built.",
 };
 
