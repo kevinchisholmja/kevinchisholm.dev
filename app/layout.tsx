@@ -57,7 +57,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="bg-canvas text-ink antialiased min-h-screen flex flex-col">
-        {/* Background blobs — fixed, pure CSS, GPU-only */}
+        {/* Background blobs — fixed, pure CSS, GPU-only, additional work to be done */}
         <div className="bg-blob bg-blob-1" aria-hidden="true" />
         <div className="bg-blob bg-blob-2" aria-hidden="true" />
 
