@@ -58,7 +58,7 @@ export default function SupportPage() {
           Bitcoin
         </p>
         <p className="font-mono text-sm text-ink break-all select-all">
-          address-pending
+          bc1qvf0npfq5vm7ynpll0v2v2mru8w6tqmutmq8hrn
         </p>
         <p className="text-xs text-faint mt-2">Tap to select, then copy</p>
       </div>
